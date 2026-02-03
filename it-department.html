@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Department | Abu Dhabi Aviation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ada-red: #C8102E;
+            --ada-red-dark: #A00D24;
+            --ada-charcoal: #58585A;
+            --ada-dark-gray: #333333;
+            --ada-black: #1A1A1A;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F7;
+            --border-gray: #D1D1D6;
+            --success: #34C759;
+            --warning: #FF9500;
+            --font-family: 'Roboto', sans-serif;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-xxl: 48px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.25s ease;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--ada-dark-gray);
+            background-color: var(--light-gray);
+        }
+
+        a {
+            color: var(--ada-red);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        a:hover {
+            color: var(--ada-red-dark);
+        }
+
+        /* Header */
+        .main-header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-md) var(--spacing-xl);
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--ada-red);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .logo-image {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ada-dark-gray);
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--ada-charcoal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 var(--spacing-xl);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--light-gray);
+            border-radius: 24px;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 2px solid transparent;
+        }
+
+        .search-box:focus-within {
+            border-color: var(--ada-red);
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            background: none;
+            font-family: var(--font-family);
+            font-size: 14px;
+            padding: var(--spacing-xs);
+            outline: none;
+        }
+
+        .search-box button {
+            background: none;
+            border: none;
+            color: var(--ada-charcoal);
+            cursor: pointer;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light-gray);
+            color: var(--ada-charcoal);
+            cursor: pointer;
+            border: none;
+            position: relative;
+        }
+
+        .header-icon:hover {
+            background: var(--ada-red);
+            color: var(--white);
+        }
+
+        .header-icon .badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: var(--ada-red);
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: 24px;
+            cursor: pointer;
+        }
+
+        .user-profile:hover {
+            background: var(--light-gray);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--ada-red) 0%, var(--ada-red-dark) 100%);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .user-name {
+            font-weight: 500;
+            font-size: 13px;
+            color: var(--ada-dark-gray);
+        }
+
+        .user-role {
+            font-size: 11px;
+            color: var(--ada-charcoal);
+        }
+
+        /* Navigation */
+        .main-nav {
+            background: var(--ada-black);
+            padding: 0 var(--spacing-xl);
+        }
+
+        .nav-container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-xs);
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-md);
+            color: var(--white);
+            font-size: 13px;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom-color: var(--ada-red);
+        }
+
+        /* Department Hero */
+        .dept-hero {
+            background: linear-gradient(135deg, var(--ada-black) 0%, var(--ada-charcoal) 100%);
+            padding: var(--spacing-xxl) var(--spacing-xl);
+        }
+
+        .dept-hero-content {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: 13px;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--white);
+        }
+
+        .breadcrumb span {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .breadcrumb .current {
+            color: var(--white);
+        }
+
+        .dept-hero h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .dept-hero h1 i {
+            color: var(--ada-red);
+        }
+
+        .dept-hero p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+        }
+
+        /* Main Content */
+        .dept-main {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: var(--spacing-xl);
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: var(--spacing-xl);
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ada-dark-gray);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .section-title i {
+            color: var(--ada-red);
+        }
+
+        .view-all {
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        /* Cards */
+        .sidebar-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--ada-charcoal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            font-size: 12px;
+            color: var(--ada-charcoal);
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        /* Status Banner */
+        .status-banner {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-left: 4px solid var(--success);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .status-banner-content {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .status-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .status-text h4 {
+            font-size: 16px;
+            color: #2E7D32;
+            margin-bottom: 4px;
+        }
+
+        .status-text p {
+            font-size: 13px;
+            color: #558B2F;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius-md);
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: 2px solid #2E7D32;
+            background: transparent;
+            color: #2E7D32;
+            margin-left: auto;
+        }
+
+        .btn:hover {
+            background: #2E7D32;
+            color: white;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+        }
+
+        .team-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .team-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--ada-red) 0%, var(--ada-red-dark) 100%);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 auto var(--spacing-md);
+        }
+
+        .team-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ada-dark-gray);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .team-card .role {
+            font-size: 12px;
+            color: var(--ada-red);
+            font-weight: 500;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .team-card .contact {
+            font-size: 12px;
+            color: var(--ada-charcoal);
+        }
+
+        /* Service Cards Grid */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(200, 16, 46, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            color: var(--ada-red);
+            font-size: 28px;
+        }
+
+        .service-card h4 {
+            font-size: 15px;
+            margin-bottom: var(--spacing-xs);
+            color: var(--ada-dark-gray);
+        }
+
+        .service-card p {
+            font-size: 12px;
+            color: var(--ada-charcoal);
+        }
+
+        /* Document List */
+        .doc-list {
+            list-style: none;
+        }
+
+        .doc-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--border-gray);
+            transition: background var(--transition-fast);
+        }
+
+        .doc-item:hover {
+            background: var(--light-gray);
+        }
+
+        .doc-item:last-child {
+            border-bottom: none;
+        }
+
+        .doc-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--light-gray);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ada-red);
+            font-size: 20px;
+        }
+
+        .doc-info {
+            flex: 1;
+        }
+
+        .doc-info h4 {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ada-dark-gray);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .doc-info p {
+            font-size: 12px;
+            color: var(--ada-charcoal);
+        }
+
+        .doc-action {
+            color: var(--ada-charcoal);
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-sm);
+        }
+
+        .doc-action:hover {
+            background: var(--ada-red);
+            color: var(--white);
+        }
+
+        /* Workflow Grid */
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-sm);
+        }
+
+        .workflow-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md);
+            background: var(--light-gray);
+            border-radius: var(--radius-md);
+            color: var(--ada-dark-gray);
+            font-size: 13px;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        .workflow-btn:hover {
+            background: var(--ada-red);
+            color: var(--white);
+        }
+
+        /* CTA Card */
+        .cta-card {
+            background: linear-gradient(135deg, var(--ada-red) 0%, var(--ada-red-dark) 100%);
+            color: white;
+            text-align: center;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-card i {
+            font-size: 48px;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-card h3 {
+            font-size: 18px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .cta-card p {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            width: 100%;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background: white;
+            color: var(--ada-red);
+            border-radius: var(--radius-md);
+            font-weight: 500;
+        }
+
+        .cta-btn:hover {
+            background: var(--light-gray);
+            color: var(--ada-red);
+        }
+
+        /* Contact Card */
+        .contact-card {
+            background: linear-gradient(135deg, var(--ada-red) 0%, var(--ada-red-dark) 100%);
+            color: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .contact-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .contact-card p {
+            font-size: 13px;
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            opacity: 0.9;
+        }
+
+        /* Sidebar Nav */
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav-item {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .sidebar-nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
+            color: var(--ada-dark-gray);
+            border-radius: var(--radius-md);
+            font-size: 13px;
+        }
+
+        .sidebar-nav-link:hover {
+            background: var(--light-gray);
+            color: var(--ada-red);
+        }
+
+        .sidebar-nav-link i {
+            width: 20px;
+            text-align: center;
+            color: var(--ada-charcoal);
+        }
+
+        .sidebar-nav-link:hover i {
+            color: var(--ada-red);
+        }
+
+        /* Footer */
+        .main-footer {
+            background: var(--ada-black);
+            color: var(--white);
+            padding: var(--spacing-xxl) var(--spacing-xl);
+            margin-top: var(--spacing-xxl);
+        }
+
+        .footer-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: var(--spacing-xxl);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--ada-red);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 14px;
+        }
+
+        .footer-logo-text {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .footer-brand p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-xl);
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+        }
+
+        .footer-column a:hover {
+            color: var(--ada-red);
+        }
+
+        .footer-contact p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 1200px) {
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .service-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .dept-main {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="header-top">
+            <a href="index.html" class="logo-container">
+                <img src="ADA_logo.png" alt="Abu Dhabi Aviation" class="logo-image">
+            </a>
+
+            <div class="search-container">
+                <div class="search-box">
+                    <button type="button"><i class="fas fa-search"></i></button>
+                    <input type="text" placeholder="Search IT resources, guides, tickets...">
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button class="header-icon" title="Notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </button>
+                <button class="header-icon" title="Apps">
+                    <i class="fas fa-th"></i>
+                </button>
+                <button class="header-icon" title="Help">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+                <div class="user-profile">
+                    <div class="user-avatar">JD</div>
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Flight Operations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="nav-container">
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link active"><i class="fas fa-building"></i>
+                            Departments</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-book"></i> Resources</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-newspaper"></i> News & Events</a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-users"></i> People Directory</a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-headset"></i> IT Support</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Department Hero -->
+    <section class="dept-hero">
+        <div class="dept-hero-content">
+            <nav class="breadcrumb">
+                <a href="#">Home</a>
+                <span>/</span>
+                <a href="#">Departments</a>
+                <span>/</span>
+                <span class="current">IT Department</span>
+            </nav>
+            <h1>
+                <i class="fas fa-server"></i>
+                Information Technology
+            </h1>
+            <p>Providing technology solutions, infrastructure support, and digital innovation to enable operational
+                excellence across Abu Dhabi Aviation. Your partner in digital transformation.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="dept-main">
+        <div class="dept-content">
+            <!-- Service Status Banner -->
+            <div class="status-banner">
+                <div class="status-banner-content">
+                    <div class="status-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="status-text">
+                        <h4>All Systems Operational</h4>
+                        <p>Last updated: Jan 27, 2025 at 09:15 AM GST</p>
+                    </div>
+                    <a href="#" class="btn">View Status Page</a>
+                </div>
+            </div>
+
+            <!-- IT Announcements -->
+            <section style="margin-bottom: var(--spacing-xl);">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-bullhorn"></i>
+                        IT Announcements
+                    </h2>
+                </div>
+
+                <div class="sidebar-card" style="border-left: 4px solid var(--warning);">
+                    <div style="display: flex; align-items: flex-start; gap: var(--spacing-sm);">
+                        <i class="fas fa-exclamation-triangle" style="color: var(--warning); margin-top: 4px;"></i>
+                        <div>
+                            <h4 style="font-size: 16px; margin-bottom: var(--spacing-sm); color: var(--ada-dark-gray);">
+                                Scheduled Maintenance: Email System Migration
+                            </h4>
+                            <p style="font-size: 14px; color: var(--ada-charcoal); margin-bottom: var(--spacing-sm);">
+                                On February 5th, 2025, from 11:00 PM to 2:00 AM GST, we will be migrating our email
+                                system to Microsoft 365. During this window, email services will be unavailable.
+                            </p>
+                            <div class="article-meta">
+                                <span><i class="fas fa-calendar"></i> Scheduled: Feb 5, 2025</span>
+                                <span><i class="fas fa-clock"></i> 3 hours downtime</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <h4 style="font-size: 16px; margin-bottom: var(--spacing-sm); color: var(--ada-dark-gray);">
+                        New Password Policy Effective Immediately
+                    </h4>
+                    <p style="font-size: 14px; color: var(--ada-charcoal); margin-bottom: var(--spacing-sm);">
+                        As part of our security enhancement initiative, all users must update their passwords to meet
+                        the new complexity requirements. Passwords must now be at least 12 characters.
+                    </p>
+                    <div class="article-meta">
+                        <span><i class="fas fa-user"></i> IT Security Team</span>
+                        <span><i class="fas fa-calendar"></i> Jan 20, 2025</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Team Directory -->
+            <section style="margin-bottom: var(--spacing-xl);">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-users"></i>
+                        IT Team
+                    </h2>
+                    <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-avatar">RJ</div>
+                        <h4>Rajesh Jayaraman</h4>
+                        <div class="role">IT Director / CIO</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="6012010a0513084e0a200104014e0105">[email&#160;protected]</a></div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">FA</div>
+                        <h4>Fatima Al-Hashemi</h4>
+                        <div class="role">Infrastructure Manager</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="026463766b6f632c6a426366632c6367">[email&#160;protected]</a></div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">MC</div>
+                        <h4>Michael Chen</h4>
+                        <div class="role">Applications Manager</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="7e13171d161f1b12501d3e1f1a1f501f1b">[email&#160;protected]</a></div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">SA</div>
+                        <h4>Sara Al-Mazrouei</h4>
+                        <div class="role">Cybersecurity Lead</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="8efdeffcefa0e3ceefeaefa0efeb">[email&#160;protected]</a></div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">DK</div>
+                        <h4>David Kim</h4>
+                        <div class="role">Network Engineer</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="690d081f000d470229080d0847080c">[email&#160;protected]</a></div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">AM</div>
+                        <h4>Aisha Mohammed</h4>
+                        <div class="role">Help Desk Supervisor</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="65040c160d044b08250401044b0400">[email&#160;protected]</a></div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">PV</div>
+                        <h4>Pavel Volkov</h4>
+                        <div class="role">Database Administrator</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="6f1f0e190a0341192f0e0b0e410e0a">[email&#160;protected]</a></div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">LN</div>
+                        <h4>Layla Nasir</h4>
+                        <div class="role">Business Analyst</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="0a666b73666b24644a6b6e6b246b6f">[email&#160;protected]</a></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Self-Service Resources -->
+            <section style="margin-bottom: var(--spacing-xl);">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-life-ring"></i>
+                        Self-Service Resources
+                    </h2>
+                </div>
+
+                <div class="service-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-key"></i></div>
+                        <h4>Password Reset</h4>
+                        <p>Reset your network password or unlock your account</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-wifi"></i></div>
+                        <h4>WiFi Setup</h4>
+                        <p>Connect your devices to corporate WiFi network</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-laptop"></i></div>
+                        <h4>VPN Access</h4>
+                        <p>Setup and troubleshoot remote access VPN</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- IT Documentation -->
+            <section style="margin-bottom: var(--spacing-xl);">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-folder-open"></i>
+                        IT Documentation
+                    </h2>
+                    <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="sidebar-card">
+                    <ul class="doc-list">
+                        <li class="doc-item">
+                            <div class="doc-icon"><i class="fas fa-file-pdf"></i></div>
+                            <div class="doc-info">
+                                <h4>IT Security Policy v3.2</h4>
+                                <p>Updated: Jan 15, 2025 • 1.2 MB</p>
+                            </div>
+                            <a href="#" class="doc-action"><i class="fas fa-download"></i></a>
+                        </li>
+                        <li class="doc-item">
+                            <div class="doc-icon"><i class="fas fa-file-pdf"></i></div>
+                            <div class="doc-info">
+                                <h4>Acceptable Use Policy</h4>
+                                <p>Updated: Dec 1, 2024 • 450 KB</p>
+                            </div>
+                            <a href="#" class="doc-action"><i class="fas fa-download"></i></a>
+                        </li>
+                        <li class="doc-item">
+                            <div class="doc-icon"><i class="fas fa-file-alt"></i></div>
+                            <div class="doc-info">
+                                <h4>Email Setup Guide - Outlook 365</h4>
+                                <p>Updated: Jan 20, 2025 • 820 KB</p>
+                            </div>
+                            <a href="#" class="doc-action"><i class="fas fa-download"></i></a>
+                        </li>
+                        <li class="doc-item">
+                            <div class="doc-icon"><i class="fas fa-file-alt"></i></div>
+                            <div class="doc-info">
+                                <h4>Remote Work Technical Guide</h4>
+                                <p>Updated: Nov 15, 2024 • 1.5 MB</p>
+                            </div>
+                            <a href="#" class="doc-action"><i class="fas fa-download"></i></a>
+                        </li>
+                        <li class="doc-item">
+                            <div class="doc-icon"><i class="fas fa-file-video"></i></div>
+                            <div class="doc-info">
+                                <h4>Microsoft Teams Training Video</h4>
+                                <p>Duration: 15 min • 45 MB</p>
+                            </div>
+                            <a href="#" class="doc-action"><i class="fas fa-play"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- Submit Ticket CTA -->
+            <div class="cta-card">
+                <i class="fas fa-headset"></i>
+                <h3>Need IT Support?</h3>
+                <p>Submit a ticket and our team will assist you promptly.</p>
+                <a href="#" class="cta-btn">
+                    <i class="fas fa-ticket-alt"></i>
+                    Submit Ticket
+                </a>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title"><i class="fas fa-rocket"></i> Quick Actions</h3>
+                <div class="workflow-grid">
+                    <a href="#" class="workflow-btn"><i class="fas fa-ticket-alt"></i> My Tickets</a>
+                    <a href="#" class="workflow-btn"><i class="fas fa-box"></i> Request Hardware</a>
+                    <a href="#" class="workflow-btn"><i class="fas fa-download"></i> Software Catalog</a>
+                    <a href="#" class="workflow-btn"><i class="fas fa-book"></i> Knowledge Base</a>
+                </div>
+            </div>
+
+            <!-- Help Desk Stats -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title"><i class="fas fa-chart-line"></i> Help Desk Status</h3>
+                <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border-gray);">
+                        <span style="font-size: 13px; color: var(--ada-charcoal);">Open Tickets</span>
+                        <span style="font-size: 18px; font-weight: 700; color: var(--warning);">24</span>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border-gray);">
+                        <span style="font-size: 13px; color: var(--ada-charcoal);">Avg. Response Time</span>
+                        <span style="font-size: 18px; font-weight: 700; color: var(--success);">2.4h</span>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-sm) 0;">
+                        <span style="font-size: 13px; color: var(--ada-charcoal);">Resolved This Week</span>
+                        <span style="font-size: 18px; font-weight: 700; color: var(--ada-red);">156</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Card -->
+            <div class="contact-card">
+                <h3><i class="fas fa-phone-alt"></i> IT Help Desk</h3>
+                <p><i class="fas fa-phone"></i> Ext. 5000</p>
+                <p><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                        data-cfemail="650c110d0009150100160e250401044b0400">[email&#160;protected]</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> Admin Building, Ground Floor</p>
+                <p><i class="fas fa-clock"></i> Sun-Thu: 7AM - 7PM</p>
+                <p style="margin-top: var(--spacing-sm);"><i class="fas fa-phone-volume"></i> After Hours: Ext. 5555</p>
+            </div>
+
+            <!-- Useful Links -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title"><i class="fas fa-link"></i> Useful Links</h3>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-nav-item"><a href="#" class="sidebar-nav-link"><i
+                                class="fas fa-external-link-alt"></i> Microsoft 365 Portal</a></li>
+                    <li class="sidebar-nav-item"><a href="#" class="sidebar-nav-link"><i
+                                class="fas fa-external-link-alt"></i> SharePoint Admin</a></li>
+                    <li class="sidebar-nav-item"><a href="#" class="sidebar-nav-link"><i
+                                class="fas fa-external-link-alt"></i> Azure Portal</a></li>
+                    <li class="sidebar-nav-item"><a href="#" class="sidebar-nav-link"><i
+                                class="fas fa-external-link-alt"></i> System Status Page</a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">ADA</div>
+                    <div class="footer-logo-text">Abu Dhabi Aviation</div>
+                </div>
+                <p>Abu Dhabi Aviation is the leading provider of aviation support services in the Middle East, with over
+                    45 years of operational excellence.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Employee Handbook</a></li>
+                        <li><a href="#">Benefits Portal</a></li>
+                        <li><a href="#">Travel Booking</a></li>
+                        <li><a href="#">Expense Reports</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Safety Reports</a></li>
+                        <li><a href="#">Training Portal</a></li>
+                        <li><a href="#">Document Library</a></li>

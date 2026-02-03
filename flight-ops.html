@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Operations | Abu Dhabi Aviation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ada-red: #C8102E;
+            --ada-red-dark: #A00D24;
+            --ada-charcoal: #58585A;
+            --ada-dark-gray: #333333;
+            --ada-black: #1A1A1A;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F7;
+            --border-gray: #D1D1D6;
+            --success: #34C759;
+            --warning: #FF9500;
+            --font-family: 'Roboto', sans-serif;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-xxl: 48px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.25s ease;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--ada-dark-gray);
+            background-color: var(--light-gray);
+        }
+
+        a {
+            color: var(--ada-red);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        a:hover {
+            color: var(--ada-red-dark);
+        }
+
+        /* Header */
+        .main-header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-md) var(--spacing-xl);
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--ada-red);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .logo-image {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ada-dark-gray);
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--ada-charcoal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 var(--spacing-xl);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--light-gray);
+            border-radius: 24px;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 2px solid transparent;
+        }
+
+        .search-box:focus-within {
+            border-color: var(--ada-red);
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            background: none;
+            font-family: var(--font-family);
+            font-size: 14px;
+            padding: var(--spacing-xs);
+            outline: none;
+        }
+
+        .search-box button {
+            background: none;
+            border: none;
+            color: var(--ada-charcoal);
+            cursor: pointer;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light-gray);
+            color: var(--ada-charcoal);
+            cursor: pointer;
+            border: none;
+            position: relative;
+        }
+
+        .header-icon:hover {
+            background: var(--ada-red);
+            color: var(--white);
+        }
+
+        .header-icon .badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: var(--ada-red);
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: 24px;
+            cursor: pointer;
+        }
+
+        .user-profile:hover {
+            background: var(--light-gray);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--ada-red) 0%, var(--ada-red-dark) 100%);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .user-name {
+            font-weight: 500;
+            font-size: 13px;
+            color: var(--ada-dark-gray);
+        }
+
+        .user-role {
+            font-size: 11px;
+            color: var(--ada-charcoal);
+        }
+
+        /* Navigation */
+        .main-nav {
+            background: var(--ada-black);
+            padding: 0 var(--spacing-xl);
+        }
+
+        .nav-container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-xs);
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-md);
+            color: var(--white);
+            font-size: 13px;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom-color: var(--ada-red);
+        }
+
+        /* Department Hero */
+        .dept-hero {
+            background: linear-gradient(135deg, var(--ada-black) 0%, var(--ada-charcoal) 100%);
+            padding: var(--spacing-xxl) var(--spacing-xl);
+        }
+
+        .dept-hero-content {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: 13px;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--white);
+        }
+
+        .breadcrumb span {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .breadcrumb .current {
+            color: var(--white);
+        }
+
+        .dept-hero h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .dept-hero h1 i {
+            color: var(--ada-red);
+        }
+
+        .dept-hero p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+        }
+
+        /* Main Content */
+        .dept-main {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: var(--spacing-xl);
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: var(--spacing-xl);
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ada-dark-gray);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .section-title i {
+            color: var(--ada-red);
+        }
+
+        .view-all {
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        /* Cards */
+        .sidebar-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--ada-charcoal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            font-size: 12px;
+            color: var(--ada-charcoal);
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+        }
+
+        .team-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .team-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--ada-red) 0%, var(--ada-red-dark) 100%);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 auto var(--spacing-md);
+        }
+
+        .team-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ada-dark-gray);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .team-card .role {
+            font-size: 12px;
+            color: var(--ada-red);
+            font-weight: 500;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .team-card .contact {
+            font-size: 12px;
+            color: var(--ada-charcoal);
+        }
+
+        /* Document List */
+        .doc-list {
+            list-style: none;
+        }
+
+        .doc-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--border-gray);
+            transition: background var(--transition-fast);
+        }
+
+        .doc-item:hover {
+            background: var(--light-gray);
+        }
+
+        .doc-item:last-child {
+            border-bottom: none;
+        }
+
+        .doc-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--light-gray);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ada-red);
+            font-size: 20px;
+        }
+
+        .doc-info {
+            flex: 1;
+        }
+
+        .doc-info h4 {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ada-dark-gray);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .doc-info p {
+            font-size: 12px;
+            color: var(--ada-charcoal);
+        }
+
+        .doc-action {
+            color: var(--ada-charcoal);
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-sm);
+        }
+
+        .doc-action:hover {
+            background: var(--ada-red);
+            color: var(--white);
+        }
+
+        /* Workflow Grid */
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-sm);
+        }
+
+        .workflow-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md);
+            background: var(--light-gray);
+            border-radius: var(--radius-md);
+            color: var(--ada-dark-gray);
+            font-size: 13px;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        .workflow-btn:hover {
+            background: var(--ada-red);
+            color: var(--white);
+        }
+
+        /* Contact Card */
+        .contact-card {
+            background: linear-gradient(135deg, var(--ada-red) 0%, var(--ada-red-dark) 100%);
+            color: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .contact-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .contact-card p {
+            font-size: 13px;
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            opacity: 0.9;
+        }
+
+        /* Sidebar Nav */
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav-item {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .sidebar-nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
+            color: var(--ada-dark-gray);
+            border-radius: var(--radius-md);
+            font-size: 13px;
+        }
+
+        .sidebar-nav-link:hover {
+            background: var(--light-gray);
+            color: var(--ada-red);
+        }
+
+        .sidebar-nav-link i {
+            width: 20px;
+            text-align: center;
+            color: var(--ada-charcoal);
+        }
+
+        .sidebar-nav-link:hover i {
+            color: var(--ada-red);
+        }
+
+        /* Footer */
+        .main-footer {
+            background: var(--ada-black);
+            color: var(--white);
+            padding: var(--spacing-xxl) var(--spacing-xl);
+            margin-top: var(--spacing-xxl);
+        }
+
+        .footer-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: var(--spacing-xxl);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--ada-red);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 14px;
+        }
+
+        .footer-logo-text {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .footer-brand p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-xl);
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+        }
+
+        .footer-column a:hover {
+            color: var(--ada-red);
+        }
+
+        .footer-contact p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 1200px) {
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .dept-main {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="header-top">
+            <a href="index.html" class="logo-container">
+                <img src="ADA_logo.png" alt="Abu Dhabi Aviation" class="logo-image">
+            </a>
+
+            <div class="search-container">
+                <div class="search-box">
+                    <button type="button"><i class="fas fa-search"></i></button>
+                    <input type="text" placeholder="Search Flight Operations...">
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button class="header-icon" title="Notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </button>
+                <button class="header-icon" title="Apps">
+                    <i class="fas fa-th"></i>
+                </button>
+                <button class="header-icon" title="Help">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+                <div class="user-profile">
+                    <div class="user-avatar">JD</div>
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Flight Operations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="nav-container">
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link active"><i class="fas fa-building"></i>
+                            Departments</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-book"></i> Resources</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-newspaper"></i> News & Events</a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-users"></i> People Directory</a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-headset"></i> IT Support</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Department Hero -->
+    <section class="dept-hero">
+        <div class="dept-hero-content">
+            <nav class="breadcrumb">
+                <a href="#">Home</a>
+                <span>/</span>
+                <a href="#">Departments</a>
+                <span>/</span>
+                <span class="current">Flight Operations</span>
+            </nav>
+            <h1>
+                <i class="fas fa-plane"></i>
+                Flight Operations
+            </h1>
+            <p>The Flight Operations department is responsible for the safe and efficient execution of all flight
+                activities, crew management, flight planning, and operational excellence across our fleet.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="dept-main">
+        <div class="dept-content">
+            <!-- Department Announcements -->
+            <section style="margin-bottom: var(--spacing-xl);">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-bullhorn"></i>
+                        Department Announcements
+                    </h2>
+                </div>
+
+                <div class="sidebar-card" style="border-left: 4px solid var(--ada-red);">
+                    <h4 style="font-size: 16px; margin-bottom: var(--spacing-sm); color: var(--ada-dark-gray);">
+                        Updated Crew Scheduling Policy Effective Feb 1st
+                    </h4>
+                    <p style="font-size: 14px; color: var(--ada-charcoal); margin-bottom: var(--spacing-sm);">
+                        Please review the updated crew scheduling guidelines in the Operations Manual. Key changes
+                        include rest period adjustments and new duty time limitations in compliance with GCAA CAR-OPS 1.
+                    </p>
+                    <div class="article-meta">
+                        <span><i class="fas fa-user"></i> Capt. Ahmed Al-Mansoori</span>
+                        <span><i class="fas fa-calendar"></i> Jan 24, 2025</span>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <h4 style="font-size: 16px; margin-bottom: var(--spacing-sm); color: var(--ada-dark-gray);">
+                        AW139 Type Rating Course - March 2025
+                    </h4>
+                    <p style="font-size: 14px; color: var(--ada-charcoal); margin-bottom: var(--spacing-sm);">
+                        Applications are now open for the next AW139 type rating course. Eligible pilots should submit
+                        their applications through the Training Portal by Feb 15th.
+                    </p>
+                    <div class="article-meta">
+                        <span><i class="fas fa-calendar"></i> Jan 20, 2025</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Team Directory -->
+            <section style="margin-bottom: var(--spacing-xl);">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-users"></i>
+                        Team Directory
+                    </h2>
+                    <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-avatar">AM</div>
+                        <h4>Capt. Ahmed Al-Mansoori</h4>
+                        <div class="role">VP Flight Operations</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="3c5d5451595812517c5d585d125d59">[email&#160;protected]</a></div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">SK</div>
+                        <h4>Capt. Sarah Khan</h4>
+                        <div class="role">Chief Pilot - Helicopters</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="83f0e2f1e2ebade8c3e2e7e2ade2e6">[email&#160;protected]</a></div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">MR</div>
+                        <h4>Capt. Mohammed Rahman</h4>
+                        <div class="role">Chief Pilot - Fixed Wing</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="d7bab8bfb6babab2b3f9a597b6b3b6f9b6b2">[email&#160;protected]</a></div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">LT</div>
+                        <h4>Lisa Thompson</h4>
+                        <div class="role">Crew Scheduling Manager</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="34585d47551a40745550551a5551">[email&#160;protected]</a></div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">KA</div>
+                        <h4>Khalid Al-Ameri</h4>
+                        <div class="role">Flight Dispatch Supervisor</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="52393a333e3b367c33123336337c3337">[email&#160;protected]</a></div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">PS</div>
+                        <h4>Priya Sharma</h4>
+                        <div class="role">Ops Admin Coordinator</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="82f2f0ebfbe3acf1c2e3e6e3ace3e7">[email&#160;protected]</a></div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">JB</div>
+                        <h4>James Brown</h4>
+                        <div class="role">Standards Captain</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="5339323e36207d31133237327d3236">[email&#160;protected]</a></div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">NA</div>
+                        <h4>Nadia Ahmed</h4>
+                        <div class="role">Flight Data Analyst</div>
+                        <div class="contact"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection"
+                                class="__cf_email__"
+                                data-cfemail="9cf2fdf8f5fdb2fddcfdf8fdb2fdf9">[email&#160;protected]</a></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Document Library -->
+            <section style="margin-bottom: var(--spacing-xl);">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-folder-open"></i>
+                        Document Library
+                    </h2>
+                    <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title"><i class="fas fa-file-alt"></i> Working Documents</h3>
+                    <ul class="doc-list">
+                        <li class="doc-item">
+                            <div class="doc-icon"><i class="fas fa-file-pdf"></i></div>
+                            <div class="doc-info">
+                                <h4>Operations Manual - Part A</h4>
+                                <p>Updated: Jan 15, 2025 • 2.4 MB</p>
+                            </div>
+                            <a href="#" class="doc-action"><i class="fas fa-download"></i></a>
+                        </li>
+                        <li class="doc-item">
+                            <div class="doc-icon"><i class="fas fa-file-pdf"></i></div>
+                            <div class="doc-info">
+                                <h4>Flight Crew Operating Manual - AW139</h4>
+                                <p>Updated: Jan 10, 2025 • 5.8 MB</p>
+                            </div>
+                            <a href="#" class="doc-action"><i class="fas fa-download"></i></a>
+                        </li>
+                        <li class="doc-item">
+                            <div class="doc-icon"><i class="fas fa-file-excel"></i></div>
+                            <div class="doc-info">
+                                <h4>Crew Roster - January 2025</h4>
+                                <p>Updated: Jan 1, 2025 • 156 KB</p>
+                            </div>
+                            <a href="#" class="doc-action"><i class="fas fa-download"></i></a>
+                        </li>
+                        <li class="doc-item">
+                            <div class="doc-icon"><i class="fas fa-file-powerpoint"></i></div>
+                            <div class="doc-info">
+                                <h4>Q4 2024 Ops Performance Review</h4>
+                                <p>Updated: Dec 28, 2024 • 3.2 MB</p>
+                            </div>
+                            <a href="#" class="doc-action"><i class="fas fa-download"></i></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title"><i class="fas fa-edit"></i> Drafts & Collaboration</h3>
+                    <ul class="doc-list">
+                        <li class="doc-item">
+                            <div class="doc-icon"><i class="fas fa-file-word"></i></div>
+                            <div class="doc-info">
+                                <h4>SOP Update - Night VFR Operations (DRAFT)</h4>
+                                <p>Modified by Capt. Khan • 2 hours ago</p>
+                            </div>
+                            <a href="#" class="doc-action"><i class="fas fa-external-link-alt"></i></a>
+                        </li>
+                        <li class="doc-item">
+                            <div class="doc-icon"><i class="fas fa-file-word"></i></div>
+                            <div class="doc-info">
+                                <h4>Fuel Policy Review 2025 (DRAFT)</h4>
+                                <p>Modified by K. Al-Ameri • Yesterday</p>
+                            </div>
+                            <a href="#" class="doc-action"><i class="fas fa-external-link-alt"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- Workflow Shortcuts -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title"><i class="fas fa-rocket"></i> Workflow Shortcuts</h3>
+                <div class="workflow-grid">
+                    <a href="#" class="workflow-btn"><i class="fas fa-clipboard-list"></i> Flight Planning</a>
+                    <a href="#" class="workflow-btn"><i class="fas fa-calendar-alt"></i> Crew Roster</a>
+                    <a href="#" class="workflow-btn"><i class="fas fa-cloud-sun"></i> Weather Brief</a>
+                    <a href="#" class="workflow-btn"><i class="fas fa-exclamation-circle"></i> Report Issue</a>
+                    <a href="#" class="workflow-btn"><i class="fas fa-file-signature"></i> Tech Log</a>
+                    <a href="#" class="workflow-btn"><i class="fas fa-book"></i> NOTAMs</a>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title"><i class="fas fa-chart-bar"></i> Department Stats</h3>
+                <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border-gray);">
+                        <span style="font-size: 13px; color: var(--ada-charcoal);">Active Pilots</span>
+                        <span style="font-size: 18px; font-weight: 700; color: var(--ada-red);">156</span>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border-gray);">
+                        <span style="font-size: 13px; color: var(--ada-charcoal);">Flights This Month</span>
+                        <span style="font-size: 18px; font-weight: 700; color: var(--ada-red);">842</span>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border-gray);">
+                        <span style="font-size: 13px; color: var(--ada-charcoal);">Flight Hours (MTD)</span>
+                        <span style="font-size: 18px; font-weight: 700; color: var(--ada-red);">2,156</span>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-sm) 0;">
+                        <span style="font-size: 13px; color: var(--ada-charcoal);">Safety Events (YTD)</span>
+                        <span style="font-size: 18px; font-weight: 700; color: var(--success);">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Card -->
+            <div class="contact-card">
+                <h3><i class="fas fa-headset"></i> Department Contact</h3>
+                <p><i class="fas fa-phone"></i> Ext. 2100</p>
+                <p><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                        data-cfemail="89efe5e0eee1fde6f9fac9e8ede8a7e8ec">[email&#160;protected]</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> Ops Building, Floor 2</p>
+                <p><i class="fas fa-clock"></i> 24/7 Operations</p>
+            </div>
+
+            <!-- Related Links -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title"><i class="fas fa-link"></i> Related Links</h3>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-nav-item"><a href="#" class="sidebar-nav-link"><i
+                                class="fas fa-external-link-alt"></i> GCAA Portal</a></li>
+                    <li class="sidebar-nav-item"><a href="#" class="sidebar-nav-link"><i
+                                class="fas fa-external-link-alt"></i> Weather Services</a></li>
+                    <li class="sidebar-nav-item"><a href="#" class="sidebar-nav-link"><i
+                                class="fas fa-external-link-alt"></i> NOTAM System</a></li>
+                    <li class="sidebar-nav-item"><a href="#" class="sidebar-nav-link"><i
+                                class="fas fa-external-link-alt"></i> Training Portal</a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">ADA</div>
+                    <div class="footer-logo-text">Abu Dhabi Aviation</div>
+                </div>
+                <p>Abu Dhabi Aviation is the leading provider of aviation support services in the Middle East, with over
+                    45 years of operational excellence.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Employee Handbook</a></li>
+                        <li><a href="#">Benefits Portal</a></li>
+                        <li><a href="#">Travel Booking</a></li>
+                        <li><a href="#">Expense Reports</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Safety Reports</a></li>
+                        <li><a href="#">Training Portal</a></li>
+                        <li><a href="#">Document Library</a></li>

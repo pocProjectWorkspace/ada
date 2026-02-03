@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADA Corporate Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* View Selector Styles */
+        .view-selector-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+        }
+
+        .view-selector {
+            padding: 10px 16px;
+            background: rgba(200, 16, 46, 0.95);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .view-selector:hover {
+            background: rgba(200, 16, 46, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+
+        .view-selector:focus {
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+
+        /* View Container */
+        .view-container {
+            display: none;
+        }
+
+        .view-container.active {
+            display: block;
+        }
+
+        /* Loading State */
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.2);
+            border-top-color: #C8102E;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- View Selector Dropdown -->
+    <div class="view-selector-container">
+        <select id="viewSelector" class="view-selector" aria-label="Select Corporate Hub View">
+            <option value="option1">Corporate View</option>
+            <option value="option2">Command Center</option>
+            <option value="option3">Aurora View</option>
+            <option value="option4">Sky View</option>
+        </select>
+    </div>
+
+    <!-- View Containers -->
+    <div id="option1" class="view-container active"></div>
+    <div id="option2" class="view-container"></div>
+    <div id="option3" class="view-container"></div>
+    <div id="option4" class="view-container"></div>
+
+    <script>
+        // View content loader
+        const viewFiles = {
+            option1: 'ada-corporate-hub.html',
+            option2: 'option 2.html',
+            option3: 'option 3.html',
+            option4: 'option 4.html'
+        };
+
+        // Cache for loaded view content
+        const viewCache = {};
+        let currentViewId = null;
+        let activeIntervals = [];
+
+        // Clear intervals when switching views
+        function clearActiveIntervals() {
+            activeIntervals.forEach(id => clearInterval(id));
+            activeIntervals = [];
+        }
+
+        // Remove styles for a specific view
+        function removeViewStyles(viewId) {
+            const oldStyles = document.querySelectorAll(`style[data-view="${viewId}"]`);
+            oldStyles.forEach(style => style.remove());
+        }
+
+        // Remove all view styles except the current one
+        function removeOtherViewStyles(keepViewId) {
+            Object.keys(viewFiles).forEach(viewId => {
+                if (viewId !== keepViewId) {
+                    removeViewStyles(viewId);
+                }
+            });
+        }
+
+        // Load view content
+        async function loadView(viewId) {
+            try {
+                let html;
+
+                // Check cache first
+                if (viewCache[viewId]) {
+                    html = viewCache[viewId];
+                } else {
+                    const response = await fetch(viewFiles[viewId]);
+                    if (!response.ok) throw new Error(`Failed to load ${viewFiles[viewId]}`);
+                    html = await response.text();
+                    viewCache[viewId] = html;
+                }
+
+                // Remove styles from other views to prevent conflicts
+                removeOtherViewStyles(viewId);
+
+                // Remove existing styles for this view (in case of reload)
+                removeViewStyles(viewId);
+
+                // Extract body content (everything between <body> and </body>)
+                const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+                const bodyContent = bodyMatch ? bodyMatch[1] : html;
+
+                // Extract and inject styles
+                const styleMatches = html.match(/<style[^>]*>([\s\S]*?)<\/style>/gi);
+                if (styleMatches) {
+                    styleMatches.forEach(styleBlock => {
+                        const styleContent = styleBlock.replace(/<\/?style[^>]*>/gi, '');
+                        const styleElement = document.createElement('style');
+                        styleElement.textContent = styleContent;
+                        styleElement.setAttribute('data-view', viewId);
+                        document.head.appendChild(styleElement);
+                    });
+                }
+
+                // Inject body content
+                const container = document.getElementById(viewId);
+                container.innerHTML = bodyContent;
+
+                // Clear any existing intervals before running new scripts
+                clearActiveIntervals();
+
+                // Extract and execute scripts
+                const scriptMatches = html.match(/<script[^>]*>([\s\S]*?)<\/script>/gi);
+                if (scriptMatches) {
+                    scriptMatches.forEach(scriptBlock => {
+                        const scriptContent = scriptBlock.replace(/<\/?script[^>]*>/gi, '');
+                        try {
+                            // Wrap script to capture setInterval calls
+                            const wrappedScript = `
+                                (function() {
+                                    const originalSetInterval = window.setInterval;
+                                    window.setInterval = function(fn, delay) {
+                                        const id = originalSetInterval(fn, delay);
+                                        window.activeIntervals.push(id);
+                                        return id;
+                                    };
+                                    ${scriptContent}
+                                    window.setInterval = originalSetInterval;
+                                })();
+                            `;
+                            window.activeIntervals = activeIntervals;
+                            eval(wrappedScript);
+                        } catch (e) {
+                            console.error(`Error executing script for ${viewId}:`, e);
+                        }
+                    });
+                }
+
+                // Update navigation links
+                updateNavigationLinks(container);
+
+            } catch (error) {
+                console.error(`Error loading view ${viewId}:`, error);
+                const container = document.getElementById(viewId);
+                container.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: sans-serif; color: #666;">
+                        <div style="text-align: center;">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: #C8102E; margin-bottom: 16px;"></i>
+                            <h2 style="margin: 0 0 8px 0;">Failed to Load View</h2>
+                            <p style="margin: 0;">Please try refreshing the page.</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Update navigation links to point to correct pages
+        function updateNavigationLinks(container) {
+            // Update logo links to reload index.html
+            const logoLinks = container.querySelectorAll('a[href="#"]');
+            logoLinks.forEach(link => {
+                const img = link.querySelector('img[src*="ADA_logo"]');
+                if (img) {
+                    link.href = 'index.html';
+                }
+            });
+
+            // Update department links
+            const deptLinks = container.querySelectorAll('a[href="#"]');
+            deptLinks.forEach(link => {
+                const text = link.textContent.trim();
+                const icon = link.querySelector('i');
+
+                // Check for Flight Ops
+                if (text.includes('Flight Ops') || text.includes('Flight Operations') ||
+                    (icon && icon.classList.contains('fa-plane'))) {
+                    link.href = 'ada-flight-ops.html';
+                }
+
+                // Check for IT Department
+                if (text.includes('IT') && !text.includes('IT Support') ||
+                    text.includes('IT Department')) {
+                    link.href = 'ada-it-department.html';
+                }
+            });
+        }
+
+        // Switch between views
+        function switchView(newViewId) {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.classList.add('show');
+
+            // Clear content of previous view to remove fixed position elements
+            if (currentViewId && currentViewId !== newViewId) {
+                const oldContainer = document.getElementById(currentViewId);
+                if (oldContainer) {
+                    oldContainer.innerHTML = '';
+                }
+            }
+
+            // Load the view
+            loadView(newViewId).then(() => {
+                // Hide all views
+                document.querySelectorAll('.view-container').forEach(view => {
+                    view.classList.remove('active');
+                });
+
+                // Show selected view
+                document.getElementById(newViewId).classList.add('active');
+                currentViewId = newViewId;
+
+                // Save preference
+                localStorage.setItem('adaPreferredView', newViewId);
+
+                // Hide loading overlay
+                setTimeout(() => {
+                    loadingOverlay.classList.remove('show');
+                }, 300);
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            const selector = document.getElementById('viewSelector');
+
+            // Load saved preference or default to option1
+            const savedView = localStorage.getItem('adaPreferredView') || 'option1';
+            selector.value = savedView;
+            currentViewId = savedView;
+
+            // Load initial view
+            loadView(savedView);
+
+            // Handle view changes
+            selector.addEventListener('change', (e) => {
+                switchView(e.target.value);
+            });
+        });
+    </script>
+</body>
+</html>

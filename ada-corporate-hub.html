@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Hub | Abu Dhabi Aviation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ADA Intranet - Abu Dhabi Aviation Corporate Hub */
+        :root {
+            --ada-red: #C8102E;
+            --ada-red-dark: #A00D24;
+            --ada-red-light: #E8334D;
+            --ada-charcoal: #58585A;
+            --ada-dark-gray: #333333;
+            --ada-black: #1A1A1A;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F7;
+            --medium-gray: #E0E0E0;
+            --border-gray: #D1D1D6;
+            --success: #34C759;
+            --warning: #FF9500;
+            --info: #007AFF;
+            --font-family: 'Roboto', sans-serif;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-xxl: 48px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.25s ease;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-family);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--ada-dark-gray);
+            background-color: var(--light-gray);
+            min-height: 100vh;
+        }
+
+        a {
+            color: var(--ada-red);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        a:hover { color: var(--ada-red-dark); }
+
+        img { max-width: 100%; height: auto; }
+
+        /* Notification Banner */
+        .notification-banner {
+            background: linear-gradient(135deg, var(--ada-red) 0%, var(--ada-red-dark) 100%);
+            color: var(--white);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+
+        .notification-banner a {
+            color: var(--white);
+            text-decoration: underline;
+            font-weight: 700;
+        }
+
+        /* Header */
+        .main-header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-md) var(--spacing-xl);
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--ada-red);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .logo-image {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ada-dark-gray);
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--ada-charcoal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 var(--spacing-xl);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--light-gray);
+            border-radius: 24px;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 2px solid transparent;
+            transition: all var(--transition-fast);
+        }
+
+        .search-box:focus-within {
+            border-color: var(--ada-red);
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            background: none;
+            font-family: var(--font-family);
+            font-size: 14px;
+            padding: var(--spacing-xs);
+            outline: none;
+        }
+
+        .search-box button {
+            background: none;
+            border: none;
+            color: var(--ada-charcoal);
+            cursor: pointer;
+            padding: var(--spacing-xs);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light-gray);
+            color: var(--ada-charcoal);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: none;
+            position: relative;
+        }
+
+        .header-icon:hover {
+            background: var(--ada-red);
+            color: var(--white);
+        }
+
+        .header-icon .badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: var(--ada-red);
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: 24px;
+            cursor: pointer;
+            transition: background var(--transition-fast);
+        }
+
+        .user-profile:hover { background: var(--light-gray); }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--ada-red) 0%, var(--ada-red-dark) 100%);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .user-info { text-align: left; }
+
+        .user-name {
+            font-weight: 500;
+            font-size: 13px;
+            color: var(--ada-dark-gray);
+        }
+
+        .user-role {
+            font-size: 11px;
+            color: var(--ada-charcoal);
+        }
+
+        /* Navigation */
+        .main-nav {
+            background: var(--ada-black);
+            padding: 0 var(--spacing-xl);
+        }
+
+        .nav-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-xs);
+        }
+
+        .nav-item { position: relative; }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-md) var(--spacing-md);
+            color: var(--white);
+            font-size: 13px;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--white);
+            background: rgba(255,255,255,0.1);
+            border-bottom-color: var(--ada-red);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            min-width: 220px;
+            padding: var(--spacing-sm) 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all var(--transition-fast);
+            z-index: 1000;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
+            color: var(--ada-dark-gray);
+            font-size: 13px;
+            transition: all var(--transition-fast);
+        }
+
+        .dropdown-item:hover {
+            background: var(--light-gray);
+            color: var(--ada-red);
+        }
+
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            color: var(--ada-charcoal);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--ada-black) 0%, var(--ada-charcoal) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(200,16,46,0.1) 100%);
+        }
+
+        .hero-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: var(--spacing-xxl) var(--spacing-xl);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xxl);
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.2;
+        }
+
+        .hero-text h1 span { color: var(--ada-red); }
+
+        .hero-text p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: var(--spacing-lg);
+            max-width: 500px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-lg);
+        }
+
+        .stat-item { text-align: center; }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--ada-red);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-highlight {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .highlight-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .highlight-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--ada-red);
+            color: var(--white);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .highlight-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--ada-dark-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .highlight-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ada-dark-gray);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .highlight-content p {
+            font-size: 14px;
+            color: var(--ada-charcoal);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .highlight-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            font-size: 12px;
+            color: var(--ada-charcoal);
+        }
+
+        .highlight-meta span {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius-md);
+            font-family: var(--font-family);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--ada-red);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--ada-red-dark);
+            color: var(--white);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--ada-red);
+            border: 2px solid var(--ada-red);
+        }
+
+        .btn-outline:hover {
+            background: var(--ada-red);
+            color: var(--white);
+        }
+
+        /* Main Content Layout */
+        .main-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: var(--spacing-xl);
+            display: grid;
+            grid-template-columns: 240px 1fr 300px;
+            gap: var(--spacing-xl);
+        }
+
+        /* Sidebar Card */
+        .sidebar-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--ada-charcoal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .sidebar-nav { list-style: none; }
+
+        .sidebar-nav-item { margin-bottom: var(--spacing-xs); }
+
+        .sidebar-nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
+            color: var(--ada-dark-gray);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+            font-size: 13px;
+        }
+
+        .sidebar-nav-link:hover {
+            background: var(--light-gray);
+            color: var(--ada-red);
+        }
+
+        .sidebar-nav-link i {
+            width: 20px;
+            text-align: center;
+            color: var(--ada-charcoal);
+        }
+
+        .sidebar-nav-link:hover i { color: var(--ada-red); }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ada-dark-gray);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .section-title i { color: var(--ada-red); }
+
+        .view-all {
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        /* Featured Article */
+        .featured-article {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .featured-image {
+            background: linear-gradient(135deg, var(--ada-charcoal) 0%, var(--ada-black) 100%);
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            font-size: 80px;
+            color: rgba(255,255,255,0.1);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: var(--spacing-md);
+            left: var(--spacing-md);
+            background: var(--ada-red);
+            color: var(--white);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .featured-content {
+            padding: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featured-category {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--ada-red);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .featured-content h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--ada-dark-gray);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.3;
+        }
+
+        .featured-content p {
+            font-size: 14px;
+            color: var(--ada-charcoal);
+            margin-bottom: var(--spacing-md);
+            flex: 1;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            font-size: 12px;
+            color: var(--ada-charcoal);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--border-gray);
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+        }
+
+        .news-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .news-card-image {
+            height: 140px;
+            background: linear-gradient(135deg, var(--ada-charcoal) 0%, var(--ada-dark-gray) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.2);
+            font-size: 40px;
+        }
+
+        .news-card-content { padding: var(--spacing-md); }
+
+        .news-card-category {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--ada-red);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .news-card-content h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--ada-dark-gray);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.4;
+        }
+
+        .news-card-content p {
+            font-size: 13px;
+            color: var(--ada-charcoal);
+            margin-bottom: var(--spacing-sm);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-card-meta {
+            font-size: 11px;
+            color: var(--ada-charcoal);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        /* Quick Links */
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-sm);
+        }
+
+        .quick-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md);
+            background: var(--light-gray);
+            border-radius: var(--radius-md);
+            text-align: center;
+            transition: all var(--transition-fast);
+            color: var(--ada-dark-gray);
+        }
+
+        .quick-link:hover {
+            background: var(--ada-red);
+            color: var(--white);
+        }
+
+        .quick-link i { font-size: 24px; }
+        .quick-link span { font-size: 11px; font-weight: 500; }
+
+        /* Events Widget */
+        .event-item {
+            display: flex;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .event-item:last-child { border-bottom: none; }
+
+        .event-date {
+            background: var(--ada-red);
+            color: var(--white);
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-md);
+            text-align: center;
+            min-width: 50px;
+        }
+
+        .event-day {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .event-month {
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+        .event-info h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ada-dark-gray);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .event-info p {
+            font-size: 12px;
+            color: var(--ada-charcoal);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        /* Department Tiles */
+        .departments-section {
+            background: var(--white);
+            padding: var(--spacing-xxl) var(--spacing-xl);
+        }
+
+        .departments-container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .dept-tile {
+            background: var(--light-gray);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+        }
+
+        .dept-tile:hover {
+            background: var(--ada-red);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .dept-tile:hover .dept-icon,
+        .dept-tile:hover .dept-name { color: var(--white); }
+
+        .dept-icon {
+            font-size: 32px;
+            margin-bottom: var(--spacing-sm);
+            color: var(--ada-red);
+        }
+
+        .dept-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ada-dark-gray);
+        }
+
+        /* Footer */
+        .main-footer {
+            background: var(--ada-black);
+            color: var(--white);
+            padding: var(--spacing-xxl) var(--spacing-xl);
+        }
+
+        .footer-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: var(--spacing-xxl);
+        }
+
+        .footer-brand p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+            margin-top: var(--spacing-md);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--ada-red);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 14px;
+        }
+
+        .footer-logo-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-xl);
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: var(--white);
+        }
+
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: var(--spacing-sm); }
+
+        .footer-column a {
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-column a:hover { color: var(--ada-red); }
+
+        .footer-contact p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Alert Card */
+        .alert-card {
+            background: #FFF9E6;
+            border-left: 4px solid var(--warning);
+        }
+
+        .alert-card .sidebar-title { color: #B8860B; }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 1fr 280px;
+            }
+            .left-sidebar { display: none; }
+            .departments-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content { grid-template-columns: 1fr; }
+            .main-content { grid-template-columns: 1fr; }
+            .featured-article { grid-template-columns: 1fr; }
+            .departments-grid { grid-template-columns: repeat(3, 1fr); }
+            .footer-container { grid-template-columns: 1fr; text-align: center; }
+        }
+
+        @media (max-width: 768px) {
+            .header-top { flex-wrap: wrap; gap: var(--spacing-md); }
+            .search-container { order: 3; max-width: 100%; margin: 0; width: 100%; }
+            .departments-grid { grid-template-columns: repeat(2, 1fr); }
+            .news-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification Banner -->
+    <div class="notification-banner">
+        <i class="fas fa-bullhorn"></i>
+        <span><strong>Important:</strong> Mandatory Safety Training deadline extended to Feb 15, 2025. <a href="#">Complete your training now →</a></span>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="header-top">
+            <a href="#" class="logo-container">
+                <img src="ADA_logo.png" alt="Abu Dhabi Aviation" class="logo-image">
+            </a>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <button type="button"><i class="fas fa-search"></i></button>
+                    <input type="text" placeholder="Search documents, news, people, departments...">
+                </div>
+            </div>
+            
+            <div class="header-actions">
+                <button class="header-icon" title="Notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </button>
+                <button class="header-icon" title="Apps">
+                    <i class="fas fa-th"></i>
+                </button>
+                <button class="header-icon" title="Help">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+                <div class="user-profile">
+                    <div class="user-avatar">JD</div>
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Flight Operations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-building"></i>
+                            Departments
+                            <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="ada-flight-ops.html" class="dropdown-item"><i class="fas fa-plane"></i> Flight Operations</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-truck"></i> Ground Operations</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-broadcast-tower"></i> OCC</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-graduation-cap"></i> Training</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-clipboard-check"></i> CAMO</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-wrench"></i> 145 Maintenance</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-shield-alt"></i> Safety</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-award"></i> Quality</a>
+                            <a href="ada-it-department.html" class="dropdown-item"><i class="fas fa-laptop"></i> IT</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-calculator"></i> Finance</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-users"></i> HR</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-balance-scale"></i> Legal</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-book"></i>
+                            Resources
+                            <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item"><i class="fas fa-file-alt"></i> Manuals</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-clipboard-list"></i> Policies & Procedures</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-palette"></i> Corporate Branding</a>
+                            <a href="#" class="dropdown-item"><i class="fas fa-file-contract"></i> Forms Library</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-newspaper"></i>
+                            News & Events
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-users"></i>
+                            People Directory
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-headset"></i>
+                            IT Support
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Welcome to <span>ADA</span> Corporate Hub</h1>
+                <p>Your central platform for company news, resources, policies, and collaboration. Connect with colleagues and access everything you need in one place.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">45+</div>
+                        <div class="stat-label">Years of Excellence</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">2,500+</div>
+                        <div class="stat-label">Employees</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">60+</div>
+                        <div class="stat-label">Aircraft Fleet</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-highlight">
+                <div class="highlight-header">
+                    <div class="highlight-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="highlight-title">Highlighted Announcement</div>
+                </div>
+                <div class="highlight-content">
+                    <h3>Q4 2024 Town Hall Meeting Recording Now Available</h3>
+                    <p>Watch the full recording of our quarterly town hall where leadership shared updates on company performance, strategic initiatives, and answered employee questions.</p>
+                    <div class="highlight-meta">
+                        <span><i class="fas fa-calendar"></i> Jan 15, 2025</span>
+                        <span><i class="fas fa-clock"></i> 1h 45m</span>
+                    </div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 16px;">
+                        <i class="fas fa-play"></i>
+                        Watch Recording
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Left Sidebar - Single Points of Truth -->
+        <aside class="left-sidebar">
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">
+                    <i class="fas fa-bookmark"></i>
+                    Single Points of Truth
+                </h3>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link"><i class="fas fa-book"></i> Operations Manuals</a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link"><i class="fas fa-shield-alt"></i> Safety Manuals</a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link"><i class="fas fa-wrench"></i> Maintenance Manuals</a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link"><i class="fas fa-graduation-cap"></i> Training Manuals</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">
+                    <i class="fas fa-clipboard-list"></i>
+                    Policies & Procedures
+                </h3>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link"><i class="fas fa-user-shield"></i> HR Policies</a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link"><i class="fas fa-lock"></i> Security Procedures</a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link"><i class="fas fa-plane"></i> Flight Procedures</a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link"><i class="fas fa-first-aid"></i> Emergency Procedures</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">
+                    <i class="fas fa-palette"></i>
+                    Corporate Branding
+                </h3>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link"><i class="fas fa-image"></i> Logo & Assets</a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link"><i class="fas fa-file-powerpoint"></i> Templates</a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link"><i class="fas fa-book-open"></i> Brand Guidelines</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Center Content - News Section -->
+        <section class="center-content">
+            <div class="news-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-newspaper"></i>
+                        Latest News
+                    </h2>
+                    <a href="#" class="view-all">
+                        View All News <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- Featured Article -->
+                <article class="featured-article">
+                    <div class="featured-image">
+                        <span class="featured-badge">Featured</span>
+                        <i class="fas fa-helicopter"></i>
+                    </div>
+                    <div class="featured-content">
+                        <span class="featured-category">Company News</span>
+                        <h3>ADA Welcomes Two New AW139 Helicopters to Expand Offshore Operations</h3>
+                        <p>Abu Dhabi Aviation has received two new Leonardo AW139 helicopters as part of our fleet modernization program, enhancing our offshore oil and gas support capabilities in the region.</p>
+                        <div class="article-meta">
+                            <span><i class="fas fa-user"></i> Corporate Communications</span>
+                            <span><i class="fas fa-calendar"></i> Jan 22, 2025</span>
+                            <span><i class="fas fa-eye"></i> 1,245 views</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Grid -->
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-card-image">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="news-card-content">
+                            <span class="news-card-category">Awards</span>
+                            <h4>ADA Recognized for Safety Excellence by GCAA</h4>
+                            <p>Our commitment to safety has been acknowledged with the prestigious Safety Performance Award from the General Civil Aviation Authority.</p>
+                            <div class="news-card-meta">
+                                <span><i class="fas fa-calendar"></i> Jan 20, 2025</span>
+                                <span><i class="fas fa-eye"></i> 892</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="news-card">
+                        <div class="news-card-image">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="news-card-content">
+                            <span class="news-card-category">HR Updates</span>
+                            <h4>New Employee Benefits Program Launching in February</h4>
+                            <p>Enhanced medical coverage, wellness programs, and additional leave benefits coming soon for all ADA employees.</p>
+                            <div class="news-card-meta">
+                                <span><i class="fas fa-calendar"></i> Jan 18, 2025</span>
+                                <span><i class="fas fa-eye"></i> 1,567</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="news-card">
+                        <div class="news-card-image">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="news-card-content">
+                            <span class="news-card-category">Training</span>
+                            <h4>2025 Training Calendar Now Available</h4>
+                            <p>Access the complete training schedule for the year including mandatory courses, certifications, and professional development.</p>
+                            <div class="news-card-meta">
+                                <span><i class="fas fa-calendar"></i> Jan 15, 2025</span>
+                                <span><i class="fas fa-eye"></i> 2,103</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="news-card">
+                        <div class="news-card-image">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="news-card-content">
+                            <span class="news-card-category">CSR</span>
+                            <h4>ADA Volunteers Complete Community Service Project</h4>
+                            <p>Over 50 employees participated in the annual community outreach program, contributing to local education initiatives.</p>
+                            <div class="news-card-meta">
+                                <span><i class="fas fa-calendar"></i> Jan 12, 2025</span>
+                                <span><i class="fas fa-eye"></i> 654</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- Quick Links -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">
+                    <i class="fas fa-bolt"></i>
+                    Quick Links
+                </h3>
+                <div class="quick-links-grid">
+                    <a href="#" class="quick-link">
+                        <i class="fas fa-plane-departure"></i>
+                        <span>Flight Schedule</span>
+                    </a>
+                    <a href="#" class="quick-link">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Leave Request</span>
+                    </a>
+                    <a href="#" class="quick-link">
+                        <i class="fas fa-file-invoice"></i>
+                        <span>Expenses</span>
+                    </a>
+                    <a href="#" class="quick-link">
+                        <i class="fas fa-headset"></i>
+                        <span>IT Support</span>
+                    </a>
+                    <a href="#" class="quick-link">
+                        <i class="fas fa-id-card"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="#" class="quick-link">
+                        <i class="fas fa-file-signature"></i>
+                        <span>Forms</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Events Widget -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">
+                    <i class="fas fa-calendar-alt"></i>
+                    Upcoming Events
+                </h3>
+                
+                <div class="event-item">
+                    <div class="event-date">
+                        <div class="event-day">28</div>
+                        <div class="event-month">Jan</div>
+                    </div>
+                    <div class="event-info">
+                        <h4>Safety Committee Meeting</h4>
+                        <p><i class="fas fa-clock"></i> 10:00 AM - Conference Room A</p>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-date">
+                        <div class="event-day">01</div>
+                        <div class="event-month">Feb</div>
+                    </div>
+                    <div class="event-info">
+                        <h4>New Employee Orientation</h4>
+                        <p><i class="fas fa-clock"></i> 9:00 AM - Training Center</p>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-date">
+                        <div class="event-day">05</div>
+                        <div class="event-month">Feb</div>
+                    </div>
+                    <div class="event-info">
+                        <h4>IT Systems Maintenance</h4>
+                        <p><i class="fas fa-clock"></i> 11:00 PM - 2:00 AM</p>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-date">
+                        <div class="event-day">14</div>
+                        <div class="event-month">Feb</div>
+                    </div>
+                    <div class="event-info">
+                        <h4>Quarterly All-Hands Meeting</h4>
+                        <p><i class="fas fa-clock"></i> 2:00 PM - Main Hangar</p>
+                    </div>
+                </div>
+                
+                <a href="#" class="btn btn-outline" style="width: 100%; justify-content: center; margin-top: 16px;">
+                    View Full Calendar
+                </a>
+            </div>
+            
+            <!-- Alerts Widget -->
+            <div class="sidebar-card alert-card">
+                <h3 class="sidebar-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    System Alerts
+                </h3>
+                <p style="font-size: 13px; color: var(--ada-dark-gray);">
+                    <strong>Email Migration:</strong> Outlook will be unavailable on Feb 5th from 11PM-2AM for scheduled maintenance.
+                </p>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Departments Section -->
+    <section class="departments-section">
+        <div class="departments-container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-sitemap"></i>
+                    Department Sites
+                </h2>
+                <a href="#" class="view-all">
+                    View All <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="departments-grid">
+                <a href="ada-flight-ops.html" class="dept-tile">
+                    <div class="dept-icon"><i class="fas fa-plane"></i></div>
+                    <div class="dept-name">Flight Ops</div>
+                </a>
+                <a href="#" class="dept-tile">
+                    <div class="dept-icon"><i class="fas fa-truck-loading"></i></div>
+                    <div class="dept-name">Ground Ops</div>
+                </a>
+                <a href="#" class="dept-tile">
+                    <div class="dept-icon"><i class="fas fa-broadcast-tower"></i></div>
+                    <div class="dept-name">OCC</div>
+                </a>
+                <a href="#" class="dept-tile">
+                    <div class="dept-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <div class="dept-name">Training</div>
+                </a>
+                <a href="#" class="dept-tile">
+                    <div class="dept-icon"><i class="fas fa-clipboard-check"></i></div>
+                    <div class="dept-name">CAMO</div>
+                </a>
+                <a href="#" class="dept-tile">
+                    <div class="dept-icon"><i class="fas fa-tools"></i></div>
+                    <div class="dept-name">145</div>
+                </a>
+                <a href="#" class="dept-tile">
+                    <div class="dept-icon"><i class="fas fa-hard-hat"></i></div>
+                    <div class="dept-name">Safety</div>
+                </a>
+                <a href="#" class="dept-tile">
+                    <div class="dept-icon"><i class="fas fa-medal"></i></div>
+                    <div class="dept-name">Quality</div>
+                </a>
+                <a href="ada-it-department.html" class="dept-tile">
+                    <div class="dept-icon"><i class="fas fa-server"></i></div>
+                    <div class="dept-name">IT</div>
+                </a>
+                <a href="#" class="dept-tile">
+                    <div class="dept-icon"><i class="fas fa-chart-pie"></i></div>
+                    <div class="dept-name">Finance</div>
+                </a>
+                <a href="#" class="dept-tile">
+                    <div class="dept-icon"><i class="fas fa-user-tie"></i></div>
+                    <div class="dept-name">HR</div>
+                </a>
+                <a href="#" class="dept-tile">
+                    <div class="dept-icon"><i class="fas fa-gavel"></i></div>
+                    <div class="dept-name">Legal</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">ADA</div>
+                    <div class="footer-logo-text">Abu Dhabi Aviation</div>
+                </div>
+                <p>Abu Dhabi Aviation is the leading provider of aviation support services in the Middle East, with over 45 years of operational excellence.</p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Employee Handbook</a></li>
+                        <li><a href="#">Benefits Portal</a></li>
+                        <li><a href="#">Travel Booking</a></li>
+                        <li><a href="#">Expense Reports</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Safety Reports</a></li>
+                        <li><a href="#">Training Portal</a></li>
+                        <li><a href="#">Document Library</a></li>
+                        <li><a href="#">Brand Assets</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">IT Help Desk</a></li>
+                        <li><a href="#">HR Support</a></li>
+                        <li><a href="#">Facilities</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-contact">
+                <h4 style="font-size: 14px; margin-bottom: 16px;">Contact</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Abu Dhabi International Airport, UAE</p>
+                <p><i class="fas fa-phone"></i> +971 2 505 2000</p>
+                <p><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5dcdbd3daf5d4d1d49bd4d0">[email&#160;protected]</a></p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Abu Dhabi Aviation. All rights reserved. | <a href="#" style="color: inherit;">Privacy P
