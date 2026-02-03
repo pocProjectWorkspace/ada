@@ -363,6 +363,75 @@
 
         .nav-link i { font-size: 12px; }
 
+        /* ===== HELICOPTER ANIMATION ===== */
+        .helicopter-container {
+            position: absolute;
+            top: 50%;
+            left: -150px;
+            transform: translateY(-50%);
+            z-index: 100;
+            animation: flyAcross 2.5s ease-in-out forwards;
+        }
+
+        .helicopter {
+            position: relative;
+            font-size: 80px;
+            color: var(--ada-red);
+            filter: drop-shadow(0 10px 30px rgba(200, 16, 46, 0.4));
+            animation: heliHover 0.3s ease-in-out infinite alternate;
+        }
+
+        .helicopter::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 6px;
+            background: linear-gradient(90deg, transparent, var(--ada-red), transparent);
+            border-radius: 3px;
+            animation: rotor 0.1s linear infinite;
+        }
+
+        @keyframes flyAcross {
+            0% { left: -150px; opacity: 0; }
+            10% { opacity: 1; }
+            50% { left: 50%; transform: translate(-50%, -50%) scale(1.1); }
+            100% { left: 110%; opacity: 0; }
+        }
+
+        @keyframes heliHover {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+
+        @keyframes rotor {
+            0% { transform: translateX(-50%) scaleX(1); }
+            50% { transform: translateX(-50%) scaleX(0.3); }
+            100% { transform: translateX(-50%) scaleX(1); }
+        }
+
+        .helicopter-trail {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ada-red), transparent);
+            opacity: 0;
+            animation: trailFade 2.5s ease-in-out forwards;
+            transform: translateY(-50%);
+            z-index: 99;
+        }
+
+        @keyframes trailFade {
+            0%, 20% { opacity: 0; width: 0; }
+            50% { opacity: 0.6; width: 50%; }
+            70% { opacity: 0.3; width: 80%; }
+            100% { opacity: 0; width: 100%; }
+        }
+
         /* ===== HERO SECTION ===== */
         .hero-section {
             position: relative;
@@ -380,7 +449,23 @@
         }
 
         .hero-content {
-            animation: slideUp 0.8s ease-out;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .hero-content.animate-in {
+            animation: slideUp 0.8s ease-out forwards;
+            animation-delay: 1.8s;
+        }
+
+        .hero-card {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .hero-card.animate-in {
+            animation: slideUp 0.8s ease-out forwards;
+            animation-delay: 2.1s;
         }
 
         @keyframes slideUp {
@@ -1234,8 +1319,16 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
+        <!-- Helicopter Animation -->
+        <div class="helicopter-trail"></div>
+        <div class="helicopter-container">
+            <div class="helicopter">
+                <i class="fas fa-helicopter"></i>
+            </div>
+        </div>
+
         <div class="hero-container">
-            <div class="hero-content">
+            <div class="hero-content animate-in">
                 <div class="hero-badge">
                     <i class="fas fa-circle"></i>
                     Welcome Back, John
@@ -1263,7 +1356,7 @@
                 </div>
             </div>
 
-            <div class="hero-card">
+            <div class="hero-card animate-in">
                 <div class="hero-highlight glass glass-strong">
                     <div class="highlight-header">
                         <div class="highlight-icon">

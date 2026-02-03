@@ -413,11 +413,83 @@
         }
 
         /* ============================
+           HELICOPTER ANIMATION
+           ============================ */
+        .helicopter-container {
+            position: absolute;
+            top: 50%;
+            left: -150px;
+            transform: translateY(-50%);
+            z-index: 100;
+            animation: flyAcross 2.5s ease-in-out forwards;
+        }
+
+        .helicopter {
+            position: relative;
+            font-size: 80px;
+            color: var(--ada-red);
+            filter: drop-shadow(0 10px 30px rgba(200, 16, 46, 0.4));
+            animation: heliHover 0.3s ease-in-out infinite alternate;
+        }
+
+        .helicopter::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 6px;
+            background: linear-gradient(90deg, transparent, var(--ada-red), transparent);
+            border-radius: 3px;
+            animation: rotor 0.1s linear infinite;
+        }
+
+        @keyframes flyAcross {
+            0% { left: -150px; opacity: 0; }
+            10% { opacity: 1; }
+            50% { left: 50%; transform: translate(-50%, -50%) scale(1.1); }
+            100% { left: 110%; opacity: 0; }
+        }
+
+        @keyframes heliHover {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+
+        @keyframes rotor {
+            0% { transform: translateX(-50%) scaleX(1); }
+            50% { transform: translateX(-50%) scaleX(0.3); }
+            100% { transform: translateX(-50%) scaleX(1); }
+        }
+
+        .helicopter-trail {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ada-red), transparent);
+            opacity: 0;
+            animation: trailFade 2.5s ease-in-out forwards;
+            transform: translateY(-50%);
+            z-index: 99;
+        }
+
+        @keyframes trailFade {
+            0%, 20% { opacity: 0; width: 0; }
+            50% { opacity: 0.6; width: 50%; }
+            70% { opacity: 0.3; width: 80%; }
+            100% { opacity: 0; width: 100%; }
+        }
+
+        /* ============================
            HERO SECTION
            ============================ */
         .hero {
             padding: var(--space-4xl) var(--space-xl);
             position: relative;
+            overflow: hidden;
         }
 
         .hero-inner {
@@ -431,7 +503,22 @@
 
         .hero-content {
             opacity: 0;
-            animation: fadeUp 1s ease forwards;
+            transform: translateY(30px);
+        }
+
+        .hero-content.animate-in {
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 1.8s;
+        }
+
+        .hero-card-wrapper {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero-card-wrapper.animate-in {
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 2.1s;
         }
 
         @keyframes fadeUp {
@@ -1347,8 +1434,16 @@
 
         <!-- Hero -->
         <section class="hero">
+            <!-- Helicopter Animation -->
+            <div class="helicopter-trail"></div>
+            <div class="helicopter-container">
+                <div class="helicopter">
+                    <i class="fas fa-helicopter"></i>
+                </div>
+            </div>
+
             <div class="hero-inner">
-                <div class="hero-content">
+                <div class="hero-content animate-in">
                     <div class="hero-eyebrow">Welcome Back, John</div>
                     <h1 class="hero-title">
                         Connecting Our<br><span class="accent">Sky-High</span> Team
@@ -1373,7 +1468,7 @@
                     </div>
                 </div>
 
-                <div class="hero-card-wrapper">
+                <div class="hero-card-wrapper animate-in">
                     <div class="hero-card card">
                         <div class="card-header">
                             <div class="card-icon">
