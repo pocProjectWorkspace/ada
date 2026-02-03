@@ -94,6 +94,7 @@
             <option value="option2">Command Center</option>
             <option value="option3">Aurora View</option>
             <option value="option4">Sky View</option>
+            <option value="option5">Elegant View</option>
         </select>
     </div>
 
@@ -102,6 +103,7 @@
     <div id="option2" class="view-container"></div>
     <div id="option3" class="view-container"></div>
     <div id="option4" class="view-container"></div>
+    <div id="option5" class="view-container"></div>
 
     <script>
         // View content loader
@@ -109,7 +111,8 @@
             option1: 'ada-corporate-hub.html',
             option2: 'option 2.html',
             option3: 'option 3.html',
-            option4: 'option 4.html'
+            option4: 'option 4.html',
+            option5: 'option 5.html'
         };
 
         // Cache for loaded view content
@@ -229,6 +232,11 @@
 
         // Update navigation links to point to correct pages
         function updateNavigationLinks(container) {
+            // Determine if we're using elegant view
+            const isElegantView = currentViewId === 'option5';
+            const flightOpsPage = isElegantView ? 'elegant-flight-ops.html' : 'ada-flight-ops.html';
+            const itDeptPage = isElegantView ? 'elegant-it-department.html' : 'ada-it-department.html';
+
             // Update logo links to reload index.html
             const logoLinks = container.querySelectorAll('a[href="#"]');
             logoLinks.forEach(link => {
@@ -247,14 +255,25 @@
                 // Check for Flight Ops
                 if (text.includes('Flight Ops') || text.includes('Flight Operations') ||
                     (icon && icon.classList.contains('fa-plane'))) {
-                    link.href = 'ada-flight-ops.html';
+                    link.href = flightOpsPage;
                 }
 
                 // Check for IT Department
                 if (text.includes('IT') && !text.includes('IT Support') ||
                     text.includes('IT Department')) {
-                    link.href = 'ada-it-department.html';
+                    link.href = itDeptPage;
                 }
+            });
+
+            // Also update href attributes that already point to department pages
+            const existingFlightOpsLinks = container.querySelectorAll('a[href="ada-flight-ops.html"], a[href="elegant-flight-ops.html"]');
+            existingFlightOpsLinks.forEach(link => {
+                link.href = flightOpsPage;
+            });
+
+            const existingItLinks = container.querySelectorAll('a[href="ada-it-department.html"], a[href="elegant-it-department.html"]');
+            existingItLinks.forEach(link => {
+                link.href = itDeptPage;
             });
         }
 
